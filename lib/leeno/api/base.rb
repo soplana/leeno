@@ -1,7 +1,12 @@
+require 'faraday'
+require 'faraday_middleware'
+
 module Leeno::Api
   class Base
     include Leeno
-    @@conn = Faraday.new(:url => Leeno::DOMAIN) do |builder|
+    DOMAIN = 'http://leeno.jp'
+    
+    @@conn = Faraday.new(:url => DOMAIN) do |builder|
       builder.request  :url_encoded
       builder.adapter  :net_http
       builder.response :json

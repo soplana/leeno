@@ -4,8 +4,8 @@ require File.expand_path('../lib/leeno/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["soplana"]
   gem.email         = ["sonosheet.jp@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Is a gem to use the Leeno API}
+  gem.summary       = %q{leeno}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Leeno::VERSION
 
-  gem.add_dependency "faraday"
-  gem.add_dependency "faraday_middleware"
+  #gem.add_dependency "faraday"
+  #gem.add_dependency "faraday_middleware"
 
 end

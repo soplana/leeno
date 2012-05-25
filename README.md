@@ -4,17 +4,17 @@ TODO: Write a gem description
 
 ## Installation
 
-Add this line to your application's Gemfile:
+    $ git clone git@github.com:soplana/leeno.git
+    $ cd Leeno
+    $ gem build leeno.gemspec
+    $ rake install 
+    $ irb
+    
+    irb(main):001:0> require "leeno"
+    => true
+    irb(main):003:0> Leeno::Api::History.find("1cz", 1).to_json
+    => {:canvas_id=>"1cz", :history_id=>1 ... :update_date=>"2012-05-08T15:52:39+09:00"}}
 
-    gem 'leeno'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install leeno
 
 ## Usage
 

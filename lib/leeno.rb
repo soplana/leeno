@@ -1,5 +1,5 @@
 require "leeno/version"
 
 module Leeno
-  # Your code goes here...
+  DOMAIN = 'http://leeno.jp'
 end

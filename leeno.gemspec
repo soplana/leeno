@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "leeno"
   gem.require_paths = ["lib"]
   gem.version       = Leeno::VERSION
+
+  gem.add_dependency "faraday"
+  gem.add_dependency "faraday_middleware"
+
 end

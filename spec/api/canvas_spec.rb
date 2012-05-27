@@ -1,6 +1,5 @@
 # -*- encoding: UTF-8 -*-
 require File.expand_path(File.join('../', 'spec_helper'), File.dirname(__FILE__))
-require 'leeno'
 include Leeno::Api
 
 
@@ -19,11 +18,11 @@ describe Canvas do
 
     it "API経由でデータが取得出来る事" do
       canvas_success!
-      Canvas.find("1cz").class.should == Leeno::Model::Canvas
+      Canvas.find("1cz").canvas_id.should == "1cz"
     end
 
     it "データの取得が出来ない場合、nilが返される事" do
-      canvas_error!
+      error!
       Canvas.find(0).should == nil
     end
   end
@@ -35,11 +34,11 @@ describe Canvas do
 
     it "API経由でデータが取得出来る事" do
       canvas_success!
-      Canvas.find!("1cz").class.should == Leeno::Model::Canvas
+      Canvas.find!("1cz").canvas_id.should == "1cz"
     end
 
     it "データの取得が出来ない場合、DocumentNotFoundが返される事" do
-      canvas_error!
+      error!
       proc{Canvas.find!(0)}.should raise_error(Leeno::DocumentNotFound)
     end
   end

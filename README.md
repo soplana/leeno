@@ -21,8 +21,19 @@
 
 ### Canvasを取得する
 ---
+    # Canvas#find success
     > Leeno::Api::Canvas.find("1cz")
     => #<Leeno::Model::Canvas:0x00000 ... >
+    # Canvas#find error
+    > Leeno::Api::Canvas.find(0)
+    => nil
+
+    # Canvas#find! success
+    > Leeno::Api::Canvas.find("1cz")
+    => #<Leeno::Model::Canvas:0x00000 ... >
+    # Canvas#find! error
+    > Leeno::Api::Canvas.find(0)
+    Leeno::DocumentNotFound: Leeno::Model::Canvas: Data Not Found
 
 ### Historyを取得する
 ---

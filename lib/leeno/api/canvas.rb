@@ -1,25 +1,35 @@
 class Leeno::Api::Canvas < Leeno::Api::Base
-  def self.find id, options={}
-    return nil if id.nil?
-    set_options!({canvas_id: id.to_s}.merge(options))
-    request_show
-  end
+  class << self
+    def find id, options={}
+      search(id, options)
+    end
 
-  private
-  def self.url
-    return {
-      show:  "/api/canvas.json",
-      index: "/api/canvases.json"
-    }
-  end
+    def find! id, options={}
+      search(id, options, true)
+    end
 
-  def self.default_options
-    return {
-      tag: true
-    }
-  end
+    def model_class
+      Leeno::Model::Canvas
+    end
 
-  def self.model_class
-    Model::Canvas
+    private
+    def search id, options, throws=false
+      return nil if id.nil?
+      set_options!({canvas_id: id.to_s}.merge(options))
+      return ( throws ? request_show! : request_show )
+    end
+
+    def url
+      return {
+        show:  "/api/canvas.json",
+        index: "/api/canvases.json"
+      }
+    end
+
+    def default_options
+      return {
+        tag: true
+      }
+    end
   end
 end

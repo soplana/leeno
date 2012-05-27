@@ -1,7 +1,10 @@
 module Leeno::Model
   class Base
     def initialize data
-      self.class::FIELDS.each{|field| self.__send__("#{field}=", data[field.to_s]) }
+      self.class::FIELDS.each do |field| 
+        value = (field.to_s =~ /_date$/ ? Time.new(data[field.to_s]) : data[field.to_s])
+        self.__send__("#{field}=", value)
+      end
     end
 
     def exclude_options!

@@ -7,4 +7,6 @@ require 'leeno/model/canvas'
 require 'leeno/model/history'
 
 module Leeno
+  class LeenoError < RuntimeError; end
+  class DocumentNotFound < LeenoError; end
 end

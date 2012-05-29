@@ -22,6 +22,11 @@ module Leeno::Api
         @@options = default_options.merge(options)
       end
 
+      def search_show options, throws=false
+        set_options!(options)
+        throws ? request_show! : request_show
+      end
+
       def request_show
         result = get(url[:show])
         result.nil? ? nil : model_class.new(result)
@@ -29,6 +34,7 @@ module Leeno::Api
 
       def request_index
         results = get(url[:index])
+        return nil if results.nil?
         results.map{|result| model_class.new(result)}
       end
 

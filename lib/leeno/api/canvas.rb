@@ -1,11 +1,13 @@
 class Leeno::Api::Canvas < Leeno::Api::Base
   class << self
     def find id, options={}
-      search(id, options)
+      return nil if id.nil?
+      search_show({canvas_id: id.to_s}.merge(options))
     end
 
     def find! id, options={}
-      search(id, options, true)
+      raise(Leeno::DocumentNotFound.new("#{model_class}: id NilClass")) if id.nil?
+      search_show({canvas_id: id.to_s}.merge(options), true)
     end
 
     def model_class
@@ -13,12 +15,6 @@ class Leeno::Api::Canvas < Leeno::Api::Base
     end
 
     private
-    def search id, options, throws=false
-      return nil if id.nil?
-      set_options!({canvas_id: id.to_s}.merge(options))
-      return ( throws ? request_show! : request_show )
-    end
-
     def url
       return {
         show:  "/api/canvas.json",

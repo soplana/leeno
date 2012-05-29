@@ -2,8 +2,12 @@ class Leeno::Api::History < Leeno::Api::Base
   class << self
     def find c_id, h_id, options={}
       return nil if (c_id.nil? || h_id.nil?)
-      set_options!({canvas_id: c_id.to_s, history_id: h_id.to_s}.merge(options))
-      request_show
+      search_show({canvas_id: c_id.to_s, history_id: h_id.to_s}.merge(options))
+    end
+   
+    def find! c_id, h_id, options={}
+      raise(Leeno::DocumentNotFound.new("#{model_class}: canvas_id or history_id NilClass")) if (c_id.nil? || h_id.nil?)
+      search_show({canvas_id: c_id.to_s, history_id: h_id.to_s}.merge(options), true)
     end
    
     def find_histories id, options={}

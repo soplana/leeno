@@ -17,7 +17,7 @@ describe Canvas do
     end
 
     it "API経由でデータが取得出来る事" do
-      canvas_success!
+      success!
       Canvas.find("1cz").canvas_id.should == "1cz"
     end
 
@@ -29,11 +29,11 @@ describe Canvas do
 
   describe "#find!" do
     it "第一引数にnilで結果が取得出来ない事" do
-      Canvas.find!(nil).should == nil
+      proc{Canvas.find!(nil)}.should raise_error(Leeno::DocumentNotFound)
     end
 
     it "API経由でデータが取得出来る事" do
-      canvas_success!
+      success!
       Canvas.find!("1cz").canvas_id.should == "1cz"
     end
 

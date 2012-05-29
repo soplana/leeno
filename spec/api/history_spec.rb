@@ -16,14 +16,59 @@ describe History do
       History.find(nil, nil).should == nil
     end
     
+    it "第二引数にnilで結果が取得出来ない事" do
+      History.find("1cz", nil).should == nil
+    end
+    
     it "API経由でデータが取得出来る事" do
-      history_success!
+      success!
       History.find("1cz", 1).canvas_id.should == "1cz"
     end
 
     it "データの取得が出来ない場合、nilが返される事" do
       error!
       History.find(0, 0).should == nil
+    end
+  end
+
+  describe "#find!" do
+    it "第一引数,第二引数にnilで結果が取得出来ない事" do
+      proc{History.find!(nil, nil)}.should raise_error(Leeno::DocumentNotFound)
+    end
+    
+    it "第二引数にnilで結果が取得出来ない事" do
+      proc{History.find!("1cz", nil)}.should raise_error(Leeno::DocumentNotFound)
+    end
+    
+    it "API経由でデータが取得出来る事" do
+      success!
+      History.find!("1cz", 1).canvas_id.should == "1cz"
+    end
+
+    it "データの取得が出来ない場合、nilが返される事" do
+      error!
+      proc{History.find!(0, 0)}.should raise_error(Leeno::DocumentNotFound)
+    end
+  end
+
+  describe "#find_histories" do
+    it "第一引数にnilで結果が取得出来ない事" do
+      History.find_histories(nil).should == nil
+    end
+    
+    it "結果が二件取得出来る事" do
+      success!
+      History.find_histories("1cz").size.should == 2
+    end
+    
+    it "history_id: 1, 2が取得出来ている事" do
+      success!
+      History.find_histories("1cz").map(&:history_id).should == [1,2]
+    end
+
+    it "データの取得が出来ない場合、nilが返される事" do
+      error!
+      History.find_histories(0).should == nil
     end
   end
 end

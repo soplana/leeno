@@ -12,8 +12,12 @@ class Leeno::Api::History < Leeno::Api::Base
    
     def find_histories id, options={}
       return nil if id.nil?
-      set_options!({canvas_id: id.to_s}.merge(options))
-      request_index
+      search_index({canvas_id: id.to_s}.merge(options))
+    end
+
+    def find_histories! id, options={}
+      raise(Leeno::DocumentNotFound.new("#{model_class}: id NilClass")) if id.nil?
+      search_index({canvas_id: id.to_s}.merge(options), true)
     end
 
     def model_class

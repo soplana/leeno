@@ -27,6 +27,11 @@ module Leeno::Api
         throws ? request_show! : request_show
       end
 
+      def search_index options, throws=false
+        set_options!(options)
+        throws ? request_index! : request_index
+      end
+
       def request_show
         result = get(url[:show])
         result.nil? ? nil : model_class.new(result)

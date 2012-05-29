@@ -19,15 +19,15 @@ describe History do
     it "第二引数にnilで結果が取得出来ない事" do
       History.find("1cz", nil).should == nil
     end
-    
-    it "API経由でデータが取得出来る事" do
-      success!
-      History.find("1cz", 1).canvas_id.should == "1cz"
-    end
 
     it "データの取得が出来ない場合、nilが返される事" do
       error!
       History.find(0, 0).should == nil
+    end
+    
+    it "API経由でデータが取得出来る事" do
+      success!
+      History.find("1cz", 1).canvas_id.should == "1cz"
     end
   end
 
@@ -39,21 +39,26 @@ describe History do
     it "第二引数にnilで結果が取得出来ない事" do
       proc{History.find!("1cz", nil)}.should raise_error(Leeno::DocumentNotFound)
     end
-    
-    it "API経由でデータが取得出来る事" do
-      success!
-      History.find!("1cz", 1).canvas_id.should == "1cz"
-    end
 
     it "データの取得が出来ない場合、nilが返される事" do
       error!
       proc{History.find!(0, 0)}.should raise_error(Leeno::DocumentNotFound)
+    end
+    
+    it "API経由でデータが取得出来る事" do
+      success!
+      History.find!("1cz", 1).canvas_id.should == "1cz"
     end
   end
 
   describe "#find_histories" do
     it "第一引数にnilで結果が取得出来ない事" do
       History.find_histories(nil).should == nil
+    end
+
+    it "データの取得が出来ない場合、nilが返される事" do
+      error!
+      History.find_histories(0).should == nil
     end
     
     it "結果が二件取得出来る事" do
@@ -65,10 +70,26 @@ describe History do
       success!
       History.find_histories("1cz").map(&:history_id).should == [1,2]
     end
+  end
+
+  describe "#find_histories!" do
+    it "第一引数にnilで結果が取得出来ない事" do
+      proc{History.find_histories!(nil)}.should raise_error(Leeno::DocumentNotFound)
+    end
 
     it "データの取得が出来ない場合、nilが返される事" do
       error!
-      History.find_histories(0).should == nil
+      proc{History.find_histories!(0)}.should raise_error(Leeno::DocumentNotFound)
+    end
+    
+    it "結果が二件取得出来る事" do
+      success!
+      History.find_histories!("1cz").size.should == 2
+    end
+    
+    it "history_id: 1, 2が取得出来ている事" do
+      success!
+      History.find_histories!("1cz").map(&:history_id).should == [1,2]
     end
   end
 end

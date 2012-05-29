@@ -45,8 +45,19 @@
     > Leeno::Api::Canvas.find("1cz").histories 
     => [#<Leeno::Model::History:0x00000 ... >
 
+    # History#find_histories success
     > Leeno::Api::History.find_histories("1cz")
     => [#<Leeno::Model::History:0x00000 ... >
+    # History#find_histories error
+    > Leeno::Api::History.find_histories("1cz")
+    => nil
+
+    # History#find_histories! success
+    > Leeno::Api::History.find_histories!("1cz")
+    => [#<Leeno::Model::History:0x00000 ... >
+    # History#find_histories! error
+    > Leeno::Api::History.find_histories!("1cz")
+    Leeno::DocumentNotFound: Leeno::Model::History: Data Not Found
 
 ### HistoryのParent(編集元History)を取得する
 ---

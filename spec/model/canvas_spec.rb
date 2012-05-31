@@ -42,5 +42,11 @@ describe Canvas do
       canvas = Leeno::Api::Canvas.find("1cz")
       canvas.to_json.keys.should == canvas.instance_variables.map{|i|i.to_s.sub(/@/,"").to_sym}
     end
+    
+    it ".histories" do
+      success!
+      histories = Leeno::Api::Canvas.find("1cz").histories
+      histories.to_json.map(&:class).uniq.should == [Hash]
+    end
   end
 end

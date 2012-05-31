@@ -11,7 +11,7 @@ class Leeno::Api::History < Leeno::Api::Base
     end
    
     def find_histories id, options={}
-      return nil if id.nil?
+      return Leeno::Array.new if id.nil?
       search_index({canvas_id: id.to_s}.merge(options))
     end
 

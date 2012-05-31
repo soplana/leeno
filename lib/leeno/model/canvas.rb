@@ -19,6 +19,6 @@ class Leeno::Model::Canvas < Model::Base
   end
 
   def histories
-    @histories ||= Api::History.find_histories(canvas_id)
+    @histories ||= Leeno::Array.new( Api::History.find_histories(canvas_id) )
   end
 end

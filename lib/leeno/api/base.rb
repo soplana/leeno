@@ -42,8 +42,8 @@ module Leeno::Api
 
       def request_index
         results = get(url[:index])
-        return nil if results.nil?
-        results.map{|result| model_class.new(result)}
+        return Leeno::Array.new if results.nil?
+        Leeno::Array.new results.map{|result| model_class.new(result)}
       end
 
       def request_show!
@@ -52,7 +52,7 @@ module Leeno::Api
 
       def request_index!
         results = get(url[:index], true)
-        results.map{|result| model_class.new(result)}
+        Leeno::Array.new results.map{|result| model_class.new(result)}
       end
 
       def get url, throws=false

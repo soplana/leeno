@@ -53,12 +53,12 @@ describe History do
 
   describe "#find_histories" do
     it "第一引数にnilで結果が取得出来ない事" do
-      History.find_histories(nil).should == nil
+      History.find_histories(nil).should == Leeno::Array.new
     end
 
-    it "データの取得が出来ない場合、nilが返される事" do
+    it "データの取得が出来ない場合、Leeno::Arrayが返される事" do
       error!
-      History.find_histories(0).should == nil
+      History.find_histories(0).should == Leeno::Array.new
     end
     
     it "結果が二件取得出来る事" do

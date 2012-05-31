@@ -4,9 +4,9 @@ require File.expand_path('../lib/leeno/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["soplana"]
   gem.email         = ["sonosheet.jp@gmail.com"]
-  gem.description   = %q{Is a gem to use the Leeno API}
-  gem.summary       = %q{leeno}
-  gem.homepage      = ""
+  gem.description   = %q{LeenoAPI client for Ruby}
+  gem.summary       = %q{LeenoAPI client for Ruby}
+  gem.homepage      = "https://github.com/soplana/leeno"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

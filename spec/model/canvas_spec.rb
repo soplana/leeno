@@ -4,32 +4,43 @@ include Leeno::Model
 
 describe Canvas do
   before do
-    sample = {
-      "canvas_id"      => "1cz", 
-      "title"          => "タイトル無し", 
-      "name"           => "名無しさん", 
-      "width"          => 600, 
-      "height"         => 400, 
-      "tags"           => ["エビ天の妖精"], 
-      "total_history"  => 50, 
-      "total_favorite" => 0, 
-      "create_date"    => "2012-03-28T15:03:47+09:00", 
-      "update_date"    => "2012-05-08T15:52:39+09:00"
-    }
-    @canvas = Canvas.new(sample)
+    success!
+    @canvas = Leeno::Api::Canvas.find("1cz")
   end
 
   describe "インスタンス変数が正しく設定されていること" do
-    it "canvas_id"   do @canvas.canvas_id.should ==      "1cz" end
-    it "title"       do @canvas.title.should     ==      "タイトル無し" end
-    it "name"        do @canvas.name.should      ==      "名無しさん" end
-    it "width"       do @canvas.width.should     ==      600 end
-    it "height"      do @canvas.height.should    ==      400 end
-    it "tags"        do @canvas.tags.should      ==      ["エビ天の妖精"] end
-    it "total"       do @canvas.total_history.should  == 50 end
-    it "totale"      do @canvas.total_favorite.should == 0 end
-    it "create_date" do @canvas.create_date.should ==    Time.new("2012-03-28T15:03:47+09:00") end
-    it "update_date" do @canvas.update_date.should ==    Time.new("2012-05-08T15:52:39+09:00") end
+    it do
+      @canvas.instance_variables.should == [:@canvas_id, :@title, :@name, :@width, :@height, :@tags, :@total_history, :@total_favorite, :@create_date, :@update_date]
+    end
   end
 
+  describe ".histories" do
+    before do
+      success!
+    end
+
+    it "Model::Historyクラスの配列が取得できること" do
+      histories = Leeno::Api::Canvas.find("1cz").histories
+      histories.map(&:class).uniq.should == [Leeno::Model::History]
+    end
+   
+    it "@historiesがnilであること" do
+      canvas = Leeno::Api::Canvas.find("1cz")
+      canvas.instance_eval{@histories}.should be_nil
+    end
+
+    it ".historiesを呼び出したら@historiesに結果が代入されること" do
+      canvas = Leeno::Api::Canvas.find("1cz")
+      histories = canvas.histories
+      canvas.instance_eval{@histories}.should == histories
+    end
+  end
+
+  describe ".to_json" do
+    it "インスタンス変数 => 値形式に変換されること" do
+      success!
+      canvas = Leeno::Api::Canvas.find("1cz")
+      canvas.to_json.keys.should == canvas.instance_variables.map{|i|i.to_s.sub(/@/,"").to_sym}
+    end
+  end
 end

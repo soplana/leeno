@@ -20,10 +20,6 @@ class Leeno::Api::History < Leeno::Api::Base
       search_index({canvas_id: id.to_s}.merge(options), true)
     end
 
-    def model_class
-      Leeno::Model::History
-    end
-
     private
     def url
       return {

@@ -10,10 +10,6 @@ class Leeno::Api::Canvas < Leeno::Api::Base
       search_show({canvas_id: id.to_s}.merge(options), true)
     end
 
-    def model_class
-      Leeno::Model::Canvas
-    end
-
     private
     def url
       return {

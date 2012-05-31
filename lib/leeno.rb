@@ -1,4 +1,5 @@
 require "leeno/version"
+require 'leeno/extention/array'
 require 'leeno/api/base'
 require 'leeno/api/canvas'
 require 'leeno/api/history'

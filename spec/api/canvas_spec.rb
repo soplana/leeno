@@ -18,7 +18,7 @@ describe Canvas do
 
     it "API経由でデータが取得出来る事" do
       success!
-      Canvas.find("1cz").canvas_id.should == "1cz"
+      Canvas.find("1cz").class.should == Leeno::Model::Canvas
     end
 
     it "データの取得が出来ない場合、nilが返される事" do
@@ -34,7 +34,7 @@ describe Canvas do
 
     it "API経由でデータが取得出来る事" do
       success!
-      Canvas.find!("1cz").canvas_id.should == "1cz"
+      Canvas.find!("1cz").class.should == Leeno::Model::Canvas
     end
 
     it "データの取得が出来ない場合、DocumentNotFoundが返される事" do
@@ -42,5 +42,5 @@ describe Canvas do
       proc{Canvas.find!(0)}.should raise_error(Leeno::DocumentNotFound)
     end
   end
-end
 
+end

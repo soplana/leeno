@@ -1,4 +1,6 @@
-class Leeno::Model::Canvas < Leeno::Model::Base
+include Leeno
+
+class Leeno::Model::Canvas < Model::Base
   FIELDS = [
      :canvas_id,
      :title,
@@ -17,6 +19,6 @@ class Leeno::Model::Canvas < Leeno::Model::Base
   end
 
   def histories
-    @histories ||= Leeno::Api::History.find_histories(canvas_id)
+    @histories ||= Api::History.find_histories(canvas_id)
   end
 end

@@ -27,7 +27,7 @@ describe History do
     
     it "API経由でデータが取得出来る事" do
       success!
-      History.find("1cz", 1).canvas_id.should == "1cz"
+      History.find("1cz", 1).class.should == Leeno::Model::History
     end
   end
 
@@ -47,7 +47,7 @@ describe History do
     
     it "API経由でデータが取得出来る事" do
       success!
-      History.find!("1cz", 1).canvas_id.should == "1cz"
+      History.find!("1cz", 1).class.should == Leeno::Model::History
     end
   end
 

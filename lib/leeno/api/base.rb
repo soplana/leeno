@@ -16,7 +16,10 @@ module Leeno::Api
     class << self
       def url;              raise; end
       def default_options;  raise; end
-      def model_class;      raise; end
+
+      def model_class
+        eval(self.to_s.gsub(/Api/, "Model"))
+      end
      
       def set_options! options
         @@options = default_options.merge(options)
